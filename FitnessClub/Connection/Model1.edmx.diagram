@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="27932b834b0e4084a2dadb85b9bcc8fa" Name="Diagram1">
+        <EntityTypeShape EntityType="FitnessClubDBModel.ClientMemberships" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessClubDBModel.Clients" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessClubDBModel.Freezes" Width="1.5" PointX="5.25" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessClubDBModel.MembershipTypes" Width="1.5" PointX="0.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessClubDBModel.Payments" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessClubDBModel.Roles" Width="1.5" PointX="8.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessClubDBModel.Trainers" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessClubDBModel.Users" Width="1.5" PointX="11" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessClubDBModel.Visits" Width="1.5" PointX="6" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessClubDBModel.WorkoutRegistrations" Width="1.5" PointX="6" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FitnessClubDBModel.Workouts" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="FitnessClubDBModel.FK__ClientMem__Clien__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessClubDBModel.FK__ClientMem__Membe__48CFD27E" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessClubDBModel.FK__Freezes__ClientM__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessClubDBModel.FK__Payments__Client__628FA481" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessClubDBModel.FK__Payments__Client__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessClubDBModel.FK__Visits__ClientId__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessClubDBModel.FK__WorkoutRe__Clien__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessClubDBModel.FK__Users__RoleId__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessClubDBModel.FK__Workouts__Traine__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessClubDBModel.FK__Visits__WorkoutI__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="FitnessClubDBModel.FK__WorkoutRe__Worko__5812160E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

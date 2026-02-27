@@ -1,0 +1,61 @@
+﻿<Window x:Class="FitnessClub.Windows.AddPaymentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitnessClub.Windows"
+        mc:Ignorable="d"
+        Title="Добавить оплату" Height="280" Width="400" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Content="Клиент*:"/>
+        <ComboBox x:Name="cmbClient" Grid.Row="0" Grid.Column="1" Margin="5" SelectedValuePath="Id">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding LastName}"/>
+                        <Run Text=" "/>
+                        <Run Text="{Binding FirstName}"/>
+                        <Run Text=" "/>
+                        <Run Text="{Binding MiddleName}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Label Grid.Row="1" Content="Сумма*:"/>
+        <TextBox x:Name="txtAmount" Grid.Row="1" Grid.Column="1" Margin="5"/>
+
+        <Label Grid.Row="2" Content="Способ оплаты*:"/>
+        <ComboBox x:Name="cmbMethod" Grid.Row="2" Grid.Column="1" Margin="5">
+            <ComboBoxItem Content="Наличные"/>
+            <ComboBoxItem Content="Карта"/>
+            <ComboBoxItem Content="Перевод"/>
+        </ComboBox>
+
+        <Label Grid.Row="3" Content="Дата*:"/>
+        <DatePicker x:Name="dpDate" Grid.Row="3" Grid.Column="1" Margin="5" SelectedDate="{x:Static System:DateTime.Today}"/>
+
+        <Label Grid.Row="4" Content="Абонемент (ID):"/>
+        <TextBox x:Name="txtMembershipId" Grid.Row="4" Grid.Column="1" Margin="5"/>
+
+        <StackPanel Grid.Row="6" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnSave" Content="Сохранить" Width="80" Margin="5" Click="btnSave_Click"/>
+            <Button x:Name="btnCancel" Content="Отмена" Width="80" Margin="5" Click="btnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

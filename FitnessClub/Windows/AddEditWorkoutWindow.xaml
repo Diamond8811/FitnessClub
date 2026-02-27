@@ -1,0 +1,64 @@
+﻿<Window x:Class="FitnessClub.Windows.AddEditWorkoutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitnessClub.Windows"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Занятие" Height="350" Width="400" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Content="Название*:"/>
+        <TextBox x:Name="txtName" Grid.Row="0" Grid.Column="1" Margin="5"/>
+
+        <Label Grid.Row="1" Content="Описание:"/>
+        <TextBox x:Name="txtDescription" Grid.Row="1" Grid.Column="1" Margin="5" Height="60" TextWrapping="Wrap"/>
+
+        <Label Grid.Row="2" Content="Тренер:"/>
+        <ComboBox x:Name="cmbTrainer" Grid.Row="2" Grid.Column="1" Margin="5" SelectedValuePath="Id">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <Run Text="{Binding LastName}"/>
+                        <Run Text=" "/>
+                        <Run Text="{Binding FirstName}"/>
+                        <Run Text=" "/>
+                        <Run Text="{Binding MiddleName}"/>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Label Grid.Row="3" Content="Дата и время*:"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+            <DatePicker x:Name="dpDate" SelectedDate="{x:Static System:DateTime.Today}" Width="120"/>
+            <TextBox x:Name="txtTime" Text="12:00" Width="80" Margin="5,0,0,0"/>
+        </StackPanel>
+
+        <Label Grid.Row="4" Content="Длительность (мин)*:"/>
+        <TextBox x:Name="txtDuration" Grid.Row="4" Grid.Column="1" Margin="5"/>
+
+        <Label Grid.Row="5" Content="Макс. участников*:"/>
+        <TextBox x:Name="txtMaxParticipants" Grid.Row="5" Grid.Column="1" Margin="5"/>
+
+        <StackPanel Grid.Row="7" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnSave" Content="Сохранить" Width="80" Margin="5" Click="btnSave_Click"/>
+            <Button x:Name="btnCancel" Content="Отмена" Width="80" Margin="5" Click="btnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

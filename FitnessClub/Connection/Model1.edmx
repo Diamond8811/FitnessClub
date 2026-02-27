@@ -1,0 +1,827 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище FitnessClubDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ClientMemberships">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="MembershipTypeId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="RemainingVisits" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="Gender" Type="char" MaxLength="1" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="RegistrationDate" Type="date" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Freezes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientMembershipId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="MembershipTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DurationDays" Type="int" Nullable="false" />
+          <Property Name="VisitsCount" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ClientMembershipId" Type="int" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trainers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Specialization" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="HireDate" Type="date" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Visits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="VisitDateTime" Type="datetime" Nullable="false" />
+          <Property Name="WorkoutId" Type="int" />
+        </EntityType>
+        <EntityType Name="WorkoutRegistrations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkoutId" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" Nullable="false" />
+          <Property Name="RegistrationTime" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Workouts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="TrainerId" Type="int" />
+          <Property Name="WorkoutDateTime" Type="datetime" Nullable="false" />
+          <Property Name="DurationMinutes" Type="int" Nullable="false" />
+          <Property Name="MaxParticipants" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ClientMem__Clien__47DBAE45">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClientMemberships" Type="Self.ClientMemberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientMemberships">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientMem__Membe__48CFD27E">
+          <End Role="MembershipTypes" Type="Self.MembershipTypes" Multiplicity="1" />
+          <End Role="ClientMemberships" Type="Self.ClientMemberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientMemberships">
+              <PropertyRef Name="MembershipTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Freezes__ClientM__4BAC3F29">
+          <End Role="ClientMemberships" Type="Self.ClientMemberships" Multiplicity="1" />
+          <End Role="Freezes" Type="Self.Freezes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientMemberships">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Freezes">
+              <PropertyRef Name="ClientMembershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Client__619B8048">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Client__628FA481">
+          <End Role="ClientMemberships" Type="Self.ClientMemberships" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientMemberships">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ClientMembershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__3C69FB99">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__ClientId__5CD6CB2B">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__WorkoutI__5DCAEF64">
+          <End Role="Workouts" Type="Self.Workouts" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workouts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="WorkoutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkoutRe__Clien__59063A47">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="WorkoutRegistrations" Type="Self.WorkoutRegistrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkoutRegistrations">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkoutRe__Worko__5812160E">
+          <End Role="Workouts" Type="Self.Workouts" Multiplicity="1" />
+          <End Role="WorkoutRegistrations" Type="Self.WorkoutRegistrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workouts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkoutRegistrations">
+              <PropertyRef Name="WorkoutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Workouts__Traine__52593CB8">
+          <End Role="Trainers" Type="Self.Trainers" Multiplicity="0..1" />
+          <End Role="Workouts" Type="Self.Workouts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workouts">
+              <PropertyRef Name="TrainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище FitnessClubDBModelContainer">
+          <EntitySet Name="ClientMemberships" EntityType="Self.ClientMemberships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Freezes" EntityType="Self.Freezes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MembershipTypes" EntityType="Self.MembershipTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainers" EntityType="Self.Trainers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Visits" EntityType="Self.Visits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkoutRegistrations" EntityType="Self.WorkoutRegistrations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workouts" EntityType="Self.Workouts" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ClientMem__Clien__47DBAE45" Association="Self.FK__ClientMem__Clien__47DBAE45">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientMemberships" EntitySet="ClientMemberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientMem__Membe__48CFD27E" Association="Self.FK__ClientMem__Membe__48CFD27E">
+            <End Role="MembershipTypes" EntitySet="MembershipTypes" />
+            <End Role="ClientMemberships" EntitySet="ClientMemberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Freezes__ClientM__4BAC3F29" Association="Self.FK__Freezes__ClientM__4BAC3F29">
+            <End Role="ClientMemberships" EntitySet="ClientMemberships" />
+            <End Role="Freezes" EntitySet="Freezes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Client__619B8048" Association="Self.FK__Payments__Client__619B8048">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Client__628FA481" Association="Self.FK__Payments__Client__628FA481">
+            <End Role="ClientMemberships" EntitySet="ClientMemberships" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__3C69FB99" Association="Self.FK__Users__RoleId__3C69FB99">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__ClientId__5CD6CB2B" Association="Self.FK__Visits__ClientId__5CD6CB2B">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__WorkoutI__5DCAEF64" Association="Self.FK__Visits__WorkoutI__5DCAEF64">
+            <End Role="Workouts" EntitySet="Workouts" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkoutRe__Clien__59063A47" Association="Self.FK__WorkoutRe__Clien__59063A47">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="WorkoutRegistrations" EntitySet="WorkoutRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkoutRe__Worko__5812160E" Association="Self.FK__WorkoutRe__Worko__5812160E">
+            <End Role="Workouts" EntitySet="Workouts" />
+            <End Role="WorkoutRegistrations" EntitySet="WorkoutRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Workouts__Traine__52593CB8" Association="Self.FK__Workouts__Traine__52593CB8">
+            <End Role="Trainers" EntitySet="Trainers" />
+            <End Role="Workouts" EntitySet="Workouts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FitnessClubDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ClientMemberships">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="MembershipTypeId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="RemainingVisits" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__ClientMem__Clien__47DBAE45" FromRole="ClientMemberships" ToRole="Clients" />
+          <NavigationProperty Name="MembershipTypes" Relationship="Self.FK__ClientMem__Membe__48CFD27E" FromRole="ClientMemberships" ToRole="MembershipTypes" />
+          <NavigationProperty Name="Freezes" Relationship="Self.FK__Freezes__ClientM__4BAC3F29" FromRole="ClientMemberships" ToRole="Freezes" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__Client__628FA481" FromRole="ClientMemberships" ToRole="Payments" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientMemberships" Relationship="Self.FK__ClientMem__Clien__47DBAE45" FromRole="Clients" ToRole="ClientMemberships" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__Client__619B8048" FromRole="Clients" ToRole="Payments" />
+          <NavigationProperty Name="Visits" Relationship="Self.FK__Visits__ClientId__5CD6CB2B" FromRole="Clients" ToRole="Visits" />
+          <NavigationProperty Name="WorkoutRegistrations" Relationship="Self.FK__WorkoutRe__Clien__59063A47" FromRole="Clients" ToRole="WorkoutRegistrations" />
+        </EntityType>
+        <EntityType Name="Freezes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientMembershipId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Reason" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientMemberships" Relationship="Self.FK__Freezes__ClientM__4BAC3F29" FromRole="Freezes" ToRole="ClientMemberships" />
+        </EntityType>
+        <EntityType Name="MembershipTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DurationDays" Type="Int32" Nullable="false" />
+          <Property Name="VisitsCount" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="ClientMemberships" Relationship="Self.FK__ClientMem__Membe__48CFD27E" FromRole="MembershipTypes" ToRole="ClientMemberships" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClientMembershipId" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientMemberships" Relationship="Self.FK__Payments__Client__628FA481" FromRole="Payments" ToRole="ClientMemberships" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Payments__Client__619B8048" FromRole="Payments" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleId__3C69FB99" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Trainers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Specialization" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HireDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Workouts" Relationship="Self.FK__Workouts__Traine__52593CB8" FromRole="Trainers" ToRole="Workouts" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Roles" Relationship="Self.FK__Users__RoleId__3C69FB99" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Visits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="VisitDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WorkoutId" Type="Int32" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Visits__ClientId__5CD6CB2B" FromRole="Visits" ToRole="Clients" />
+          <NavigationProperty Name="Workouts" Relationship="Self.FK__Visits__WorkoutI__5DCAEF64" FromRole="Visits" ToRole="Workouts" />
+        </EntityType>
+        <EntityType Name="WorkoutRegistrations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkoutId" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" Nullable="false" />
+          <Property Name="RegistrationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__WorkoutRe__Clien__59063A47" FromRole="WorkoutRegistrations" ToRole="Clients" />
+          <NavigationProperty Name="Workouts" Relationship="Self.FK__WorkoutRe__Worko__5812160E" FromRole="WorkoutRegistrations" ToRole="Workouts" />
+        </EntityType>
+        <EntityType Name="Workouts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrainerId" Type="Int32" />
+          <Property Name="WorkoutDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DurationMinutes" Type="Int32" Nullable="false" />
+          <Property Name="MaxParticipants" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Trainers" Relationship="Self.FK__Workouts__Traine__52593CB8" FromRole="Workouts" ToRole="Trainers" />
+          <NavigationProperty Name="Visits" Relationship="Self.FK__Visits__WorkoutI__5DCAEF64" FromRole="Workouts" ToRole="Visits" />
+          <NavigationProperty Name="WorkoutRegistrations" Relationship="Self.FK__WorkoutRe__Worko__5812160E" FromRole="Workouts" ToRole="WorkoutRegistrations" />
+        </EntityType>
+        <Association Name="FK__ClientMem__Clien__47DBAE45">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClientMemberships" Type="Self.ClientMemberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientMemberships">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientMem__Membe__48CFD27E">
+          <End Role="MembershipTypes" Type="Self.MembershipTypes" Multiplicity="1" />
+          <End Role="ClientMemberships" Type="Self.ClientMemberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MembershipTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientMemberships">
+              <PropertyRef Name="MembershipTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Freezes__ClientM__4BAC3F29">
+          <End Role="ClientMemberships" Type="Self.ClientMemberships" Multiplicity="1" />
+          <End Role="Freezes" Type="Self.Freezes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientMemberships">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Freezes">
+              <PropertyRef Name="ClientMembershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Client__628FA481">
+          <End Role="ClientMemberships" Type="Self.ClientMemberships" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientMemberships">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ClientMembershipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Client__619B8048">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__ClientId__5CD6CB2B">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkoutRe__Clien__59063A47">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="WorkoutRegistrations" Type="Self.WorkoutRegistrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkoutRegistrations">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__3C69FB99">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Workouts__Traine__52593CB8">
+          <End Role="Trainers" Type="Self.Trainers" Multiplicity="0..1" />
+          <End Role="Workouts" Type="Self.Workouts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workouts">
+              <PropertyRef Name="TrainerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Visits__WorkoutI__5DCAEF64">
+          <End Role="Workouts" Type="Self.Workouts" Multiplicity="0..1" />
+          <End Role="Visits" Type="Self.Visits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workouts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Visits">
+              <PropertyRef Name="WorkoutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__WorkoutRe__Worko__5812160E">
+          <End Role="Workouts" Type="Self.Workouts" Multiplicity="1" />
+          <End Role="WorkoutRegistrations" Type="Self.WorkoutRegistrations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workouts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkoutRegistrations">
+              <PropertyRef Name="WorkoutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FitnessClubDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ClientMemberships" EntityType="Self.ClientMemberships" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Freezes" EntityType="Self.Freezes" />
+          <EntitySet Name="MembershipTypes" EntityType="Self.MembershipTypes" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Trainers" EntityType="Self.Trainers" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <EntitySet Name="Visits" EntityType="Self.Visits" />
+          <EntitySet Name="WorkoutRegistrations" EntityType="Self.WorkoutRegistrations" />
+          <EntitySet Name="Workouts" EntityType="Self.Workouts" />
+          <AssociationSet Name="FK__ClientMem__Clien__47DBAE45" Association="Self.FK__ClientMem__Clien__47DBAE45">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientMemberships" EntitySet="ClientMemberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientMem__Membe__48CFD27E" Association="Self.FK__ClientMem__Membe__48CFD27E">
+            <End Role="MembershipTypes" EntitySet="MembershipTypes" />
+            <End Role="ClientMemberships" EntitySet="ClientMemberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Freezes__ClientM__4BAC3F29" Association="Self.FK__Freezes__ClientM__4BAC3F29">
+            <End Role="ClientMemberships" EntitySet="ClientMemberships" />
+            <End Role="Freezes" EntitySet="Freezes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Client__628FA481" Association="Self.FK__Payments__Client__628FA481">
+            <End Role="ClientMemberships" EntitySet="ClientMemberships" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Client__619B8048" Association="Self.FK__Payments__Client__619B8048">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__ClientId__5CD6CB2B" Association="Self.FK__Visits__ClientId__5CD6CB2B">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkoutRe__Clien__59063A47" Association="Self.FK__WorkoutRe__Clien__59063A47">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="WorkoutRegistrations" EntitySet="WorkoutRegistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__3C69FB99" Association="Self.FK__Users__RoleId__3C69FB99">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Workouts__Traine__52593CB8" Association="Self.FK__Workouts__Traine__52593CB8">
+            <End Role="Trainers" EntitySet="Trainers" />
+            <End Role="Workouts" EntitySet="Workouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Visits__WorkoutI__5DCAEF64" Association="Self.FK__Visits__WorkoutI__5DCAEF64">
+            <End Role="Workouts" EntitySet="Workouts" />
+            <End Role="Visits" EntitySet="Visits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__WorkoutRe__Worko__5812160E" Association="Self.FK__WorkoutRe__Worko__5812160E">
+            <End Role="Workouts" EntitySet="Workouts" />
+            <End Role="WorkoutRegistrations" EntitySet="WorkoutRegistrations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище FitnessClubDBModelContainer" CdmEntityContainer="FitnessClubDBEntities">
+          <EntitySetMapping Name="ClientMemberships">
+            <EntityTypeMapping TypeName="FitnessClubDBModel.ClientMemberships">
+              <MappingFragment StoreEntitySet="ClientMemberships">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="MembershipTypeId" ColumnName="MembershipTypeId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="RemainingVisits" ColumnName="RemainingVisits" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="FitnessClubDBModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Freezes">
+            <EntityTypeMapping TypeName="FitnessClubDBModel.Freezes">
+              <MappingFragment StoreEntitySet="Freezes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClientMembershipId" ColumnName="ClientMembershipId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MembershipTypes">
+            <EntityTypeMapping TypeName="FitnessClubDBModel.MembershipTypes">
+              <MappingFragment StoreEntitySet="MembershipTypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DurationDays" ColumnName="DurationDays" />
+                <ScalarProperty Name="VisitsCount" ColumnName="VisitsCount" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="FitnessClubDBModel.Payments">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="ClientMembershipId" ColumnName="ClientMembershipId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="FitnessClubDBModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainers">
+            <EntityTypeMapping TypeName="FitnessClubDBModel.Trainers">
+              <MappingFragment StoreEntitySet="Trainers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FitnessClubDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Visits">
+            <EntityTypeMapping TypeName="FitnessClubDBModel.Visits">
+              <MappingFragment StoreEntitySet="Visits">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="VisitDateTime" ColumnName="VisitDateTime" />
+                <ScalarProperty Name="WorkoutId" ColumnName="WorkoutId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkoutRegistrations">
+            <EntityTypeMapping TypeName="FitnessClubDBModel.WorkoutRegistrations">
+              <MappingFragment StoreEntitySet="WorkoutRegistrations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WorkoutId" ColumnName="WorkoutId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="RegistrationTime" ColumnName="RegistrationTime" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workouts">
+            <EntityTypeMapping TypeName="FitnessClubDBModel.Workouts">
+              <MappingFragment StoreEntitySet="Workouts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TrainerId" ColumnName="TrainerId" />
+                <ScalarProperty Name="WorkoutDateTime" ColumnName="WorkoutDateTime" />
+                <ScalarProperty Name="DurationMinutes" ColumnName="DurationMinutes" />
+                <ScalarProperty Name="MaxParticipants" ColumnName="MaxParticipants" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

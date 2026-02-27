@@ -1,0 +1,66 @@
+﻿<Window x:Class="FitnessClub.Windows.AddEditClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitnessClub.Windows"
+        mc:Ignorable="d"
+        Title="Клиент" Height="450" Width="400" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Фамилия*:" Margin="5"/>
+        <TextBox x:Name="txtLastName" Grid.Row="0" Grid.Column="1" Margin="5"/>
+
+        <Label Grid.Row="1" Grid.Column="0" Content="Имя*:" Margin="5"/>
+        <TextBox x:Name="txtFirstName" Grid.Row="1" Grid.Column="1" Margin="5"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Content="Отчество:" Margin="5"/>
+        <TextBox x:Name="txtMiddleName" Grid.Row="2" Grid.Column="1" Margin="5"/>
+
+        <Label Grid.Row="3" Grid.Column="0" Content="Дата рождения:" Margin="5"/>
+        <DatePicker x:Name="dpBirthDate" Grid.Row="3" Grid.Column="1" Margin="5"/>
+
+        <Label Grid.Row="4" Grid.Column="0" Content="Пол:" Margin="5"/>
+        <ComboBox x:Name="cmbGender" Grid.Row="4" Grid.Column="1" Margin="5">
+            <ComboBoxItem Content="Мужской" Tag="M"/>
+            <ComboBoxItem Content="Женский" Tag="F"/>
+        </ComboBox>
+
+        <Label Grid.Row="5" Grid.Column="0" Content="Телефон*:" Margin="5"/>
+        <TextBox x:Name="txtPhone" Grid.Row="5" Grid.Column="1" Margin="5"/>
+
+        <Label Grid.Row="6" Grid.Column="0" Content="Email:" Margin="5"/>
+        <TextBox x:Name="txtEmail" Grid.Row="6" Grid.Column="1" Margin="5"/>
+
+        <Label Grid.Row="7" Grid.Column="0" Content="Статус:" Margin="5"/>
+        <ComboBox x:Name="cmbStatus" Grid.Row="7" Grid.Column="1" Margin="5">
+            <ComboBoxItem Content="Активен"/>
+            <ComboBoxItem Content="Заморожен"/>
+            <ComboBoxItem Content="Удален"/>
+        </ComboBox>
+
+        <Label Grid.Row="8" Grid.Column="0" Content="Примечания:" Margin="5" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtNotes" Grid.Row="8" Grid.Column="1" Margin="5" Height="60" TextWrapping="Wrap" AcceptsReturn="True"/>
+
+        <StackPanel Grid.Row="9" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+            <Button x:Name="btnSave" Content="Сохранить" Width="80" Margin="5" Click="btnSave_Click"/>
+            <Button x:Name="btnCancel" Content="Отмена" Width="80" Margin="5" Click="btnCancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

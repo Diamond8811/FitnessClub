@@ -1,0 +1,33 @@
+﻿<Window x:Class="FitnessClub.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitnessClub"
+        mc:Ignorable="d"
+        Title="Фитнес-клуб: учет клиентов" Height="600" Width="900" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая панель с меню -->
+        <Border Grid.Column="0" Background="#f0f0f0" Padding="10">
+            <StackPanel>
+                <TextBlock Text="Меню" FontWeight="Bold" FontSize="16" Margin="0,0,0,20"/>
+                <ListBox x:Name="menuListBox" Background="Transparent" BorderThickness="0" SelectionChanged="menuListBox_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" Margin="5" FontSize="14"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Button Content="Выход" Margin="0,20,0,0" Padding="5" Click="btnExit_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Основная область для отображения страниц -->
+        <Frame x:Name="mainFrame" Grid.Column="1" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>
