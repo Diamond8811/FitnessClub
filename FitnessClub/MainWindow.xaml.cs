@@ -38,54 +38,45 @@ namespace FitnessClub
                 this.Close();
                 return;
             }
-
-            var roleId = App.CurrentUser.RoleId;
-            List<string> menuItems = new List<string>();
-
-            menuItems.Add("Клиенты");
-            menuItems.Add("Абонементы");
-            menuItems.Add("Посещения");
-            menuItems.Add("Тренеры");
-            menuItems.Add("Занятия");
-            menuItems.Add("Оплаты");
-
-            if (roleId == 1) // Администратор
-                menuItems.Add("Настройки");
-
-            menuListBox.ItemsSource = menuItems;
-            if (menuItems.Count > 0)
-                menuListBox.SelectedIndex = 0;
+            if (App.CurrentUser?.RoleId != 1)
+            {
+                btnSettings.Visibility = Visibility.Collapsed;
+            }
         }
 
-        private void menuListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btnClients_Click(object sender, RoutedEventArgs e)
         {
-            if (menuListBox.SelectedItem == null) return;
-            string selected = menuListBox.SelectedItem.ToString();
+            mainFrame.Navigate(new ClientsPage());
+        }
 
-            switch (selected)
-            {
-                case "Клиенты":
-                    mainFrame.Navigate(new ClientsPage());
-                    break;
-                case "Абонементы":
-                    mainFrame.Navigate(new MembershipsPage());
-                    break;
-                case "Посещения":
-                    mainFrame.Navigate(new VisitsPage());
-                    break;
-                case "Тренеры":
-                    mainFrame.Navigate(new TrainersPage());
-                    break;
-                case "Занятия":
-                    mainFrame.Navigate(new WorkoutsPage());
-                    break;
-                case "Оплаты":
-                    mainFrame.Navigate(new PaymentsPage());
-                    break;
-                case "Настройки":
-                    mainFrame.Navigate(new SettingsPage());
-                    break;
-            }
+        private void btnMemberships_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new MembershipsPage());
+        }
+
+        private void btnVisits_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new VisitsPage());
+        }
+
+        private void btnTrainers_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new TrainersPage());
+        }
+
+        private void btnWorkouts_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new WorkoutsPage());
+        }
+
+        private void btnPayments_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new PaymentsPage());
+        }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new SettingsPage());
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -93,7 +84,7 @@ namespace FitnessClub
             App.CurrentUser = null;
             LoginWindow login = new LoginWindow();
             login.Show();
-            this.Close();
+            Close();
         }
     }
 }
