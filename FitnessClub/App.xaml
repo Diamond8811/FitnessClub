@@ -5,7 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!-- Цветовая палитра -->
-        <Color x:Key="PrimaryColor">#FF2C3E50</Color>
+        <Color x:Key="PrimaryColor">#008DFF</Color>
         <Color x:Key="AccentColor">#FF1ABC9C</Color>
         <Color x:Key="BackgroundColor">#FFECF0F1</Color>
         <Color x:Key="TextColor">#FF2C3E50</Color>

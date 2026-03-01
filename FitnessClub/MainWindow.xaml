@@ -14,16 +14,17 @@
 
         <!-- Левая панель с меню -->
         <Border Grid.Column="0" Background="#f0f0f0" Padding="10">
-            <StackPanel>
+            <StackPanel Orientation="Vertical">
                 <TextBlock Text="Меню" FontWeight="Bold" FontSize="16" Margin="0,0,0,20"/>
                 <ListBox x:Name="menuListBox" Background="Transparent" BorderThickness="0" SelectionChanged="menuListBox_SelectionChanged">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" Margin="5" FontSize="14"/>
+                            <TextBlock Text="{Binding}" Margin=" 5" FontSize="14"/>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
                 <Button Content="Выход" Margin="0,20,0,0" Padding="5" Click="btnExit_Click"/>
+                <Image VerticalAlignment="Bottom" Margin="0 50 0 0" Source="/Img/image 1.png" HorizontalAlignment="Center"></Image>
             </StackPanel>
         </Border>
 
